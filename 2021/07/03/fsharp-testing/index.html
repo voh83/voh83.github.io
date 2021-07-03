@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="spa, eng"><!--<![endif]-->
 <head>
     <meta charset="UTF-8">
-    <title>Links Útiles</title>
+    <title>Fsharp Testing</title>
 
     <meta name="author" content="VOH 83.">
 
@@ -16,7 +16,7 @@
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
-    <link rel="canonical" href="http://example.com/2021/03/03/links-utiles/">
+    <link rel="canonical" href="http://example.com/2021/07/03/fsharp-testing/">
 
     
         <link rel="alternate" href="/atom.xml" type="application/atom+xml">
@@ -111,30 +111,29 @@
         <div>
     <article class="hentry" role="article">
         <header>
-            <h1 class="entry-title">Links Útiles</h1>
+            <h1 class="entry-title">Fsharp Testing</h1>
             <p class="meta">
-                <time datetime="2021-03-03T10:00:35.000Z" data-updated="true">Wed Mar 03 2021</time>
+                <time datetime="2021-07-03T12:50:46.000Z" data-updated="true">Sat Jul 03 2021</time>
             </p>
         </header>
         <div class="entry-content">
-            <p>Dejo aquí algunos links útiles de referencia:</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/symbol-and-operator-reference/">Significado de Símbolos y/o Operadores de Fsharp</a></li>
-<li><a target="_blank" rel="noopener" href="https://fsharpforfunandprofit.com/">Fsharp for fun and profit</a> - La mejor página de F# que he encontrado (en inglés)</li>
-<li><a target="_blank" rel="noopener" href="https://suave.io/">Suave.IO</a>- Servidor Web ligero, totalmente funcional</li>
-<li><a target="_blank" rel="noopener" href="http://dungpa.github.io/fsharp-cheatsheet/">F# Cheat Set</a> - F# Cheat Set</li>
-<li><a target="_blank" rel="noopener" href="https://fsharp.org/learn/">Fsharp foundation Resources</a></li>
+            <h2 id="Testing-Suite"><a href="#Testing-Suite" class="headerlink" title="Testing Suite"></a>Testing Suite</h2><ul>
+<li>Xunit</li>
+<li>Unquote</li>
 </ul>
+<p>Use AAA pattern, Arrangue, Act, Assert be careful about the readability of the test, and try to no use comments. (hard to do)</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/SwensenSoftware/unquote/wiki/UserGuide">Unquote user guide</a></p>
+<h2 id="Test-Example"><a href="#Test-Example" class="headerlink" title="Test Example"></a>Test Example</h2><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">[&lt;Theory&gt;]</span></span><br><span class="line"><span class="meta">[&lt;InlineData(&quot;ABDS34&quot;)&gt;]</span></span><br><span class="line"><span class="meta">[&lt;InlineData(&quot;ABD3&quot;)&gt;]</span></span><br><span class="line"><span class="meta">[&lt;InlineData(&quot;ABD34&quot;)&gt;]</span></span><br><span class="line"><span class="keyword">let</span> ``Patente validation returns the right result`` (patenteInput:string) =</span><br><span class="line"></span><br><span class="line">    <span class="keyword">let</span> actual = Reporte.validatePatente patenteInput</span><br><span class="line">    <span class="keyword">let</span> expected = Success patenteInput</span><br><span class="line">    <span class="keyword">let</span> b = expected = actual</span><br><span class="line">    test &lt;@ b @&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">[&lt;Theory&gt;]</span></span><br><span class="line"><span class="meta">[&lt;InlineData(&quot;ABDS342&quot;)&gt;]</span></span><br><span class="line"><span class="meta">[&lt;InlineData(&quot;ABD&quot;)&gt;]</span></span><br><span class="line"><span class="meta">[&lt;InlineData(&quot;&quot;)&gt;]</span></span><br><span class="line"><span class="keyword">let</span> ``Patente validation returns Error`` (patenteInput:string) =</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">let</span> actual = Reporte.validatePatente patenteInput</span><br><span class="line">    <span class="keyword">let</span> expected = Failure [<span class="string">&quot;Patente no tiene el formato correcto&quot;</span>]</span><br><span class="line">    <span class="keyword">let</span> b = expected = actual</span><br><span class="line">    test &lt;@ b @&gt;</span><br></pre></td></tr></table></figure>
 
         </div>
         <footer>
             <p class="meta">
                 <span class="byline author vcard">Posted by <span class="fn">VOH 83.</span></span>
-                <time datetime="2021-03-03T10:00:35.000Z" data-updated="true">Wed Mar 03 2021</time>
+                <time datetime="2021-07-03T12:50:46.000Z" data-updated="true">Sat Jul 03 2021</time>
                 
     <span class="categories">
     
-        <a class="category" href="/tags/Fsharp-F-Funcional/">Fsharp, F#, Funcional</a>
+        <a class="category" href="/tags/Testing-Unquote-xunit-Fsharp-F/">Testing, Unquote, xunit, Fsharp, F#.</a>
     
     </span>
 
@@ -142,7 +141,7 @@
             <div class="sharing">
     
         <a class="twitter-share-button"
-           target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=Links%20%C3%9Atiles">
+           target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=Fsharp%20Testing">
             Tweet
         </a>
     
@@ -150,11 +149,11 @@
 
             <p class="meta">
                 
-                <a class="basic-alignment left" href="/" title="Previous Post: Async functions in Fsharp">« Async functions in Fsharp</a>
+                <a class="basic-alignment left" href="/" title="Previous Post: English Tips">« English Tips</a>
                 
 
                 
-                <a class="basic-alignment right" href="/" title="Previous Post: Introducción">Introducción »</a>
+                <a class="basic-alignment right" href="/" title="Previous Post: Communication the Underrated Skill">Communication the Underrated Skill »</a>
                 
             </p>
         </footer>

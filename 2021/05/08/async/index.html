@@ -6,7 +6,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="spa, eng"><!--<![endif]-->
 <head>
     <meta charset="UTF-8">
-    <title>Links Útiles</title>
+    <title>Async functions in Fsharp</title>
 
     <meta name="author" content="VOH 83.">
 
@@ -16,7 +16,7 @@
     <meta name="MobileOptimized" content="320">
     <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1">
 
-    <link rel="canonical" href="http://example.com/2021/03/03/links-utiles/">
+    <link rel="canonical" href="http://example.com/2021/05/08/async/">
 
     
         <link rel="alternate" href="/atom.xml" type="application/atom+xml">
@@ -111,30 +111,38 @@
         <div>
     <article class="hentry" role="article">
         <header>
-            <h1 class="entry-title">Links Útiles</h1>
+            <h1 class="entry-title">Async functions in Fsharp</h1>
             <p class="meta">
-                <time datetime="2021-03-03T10:00:35.000Z" data-updated="true">Wed Mar 03 2021</time>
+                <time datetime="2021-05-08T23:01:12.245Z" data-updated="true">Sat May 08 2021</time>
             </p>
         </header>
         <div class="entry-content">
-            <p>Dejo aquí algunos links útiles de referencia:</p>
-<ul>
-<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/dotnet/fsharp/language-reference/symbol-and-operator-reference/">Significado de Símbolos y/o Operadores de Fsharp</a></li>
-<li><a target="_blank" rel="noopener" href="https://fsharpforfunandprofit.com/">Fsharp for fun and profit</a> - La mejor página de F# que he encontrado (en inglés)</li>
-<li><a target="_blank" rel="noopener" href="https://suave.io/">Suave.IO</a>- Servidor Web ligero, totalmente funcional</li>
-<li><a target="_blank" rel="noopener" href="http://dungpa.github.io/fsharp-cheatsheet/">F# Cheat Set</a> - F# Cheat Set</li>
-<li><a target="_blank" rel="noopener" href="https://fsharp.org/learn/">Fsharp foundation Resources</a></li>
-</ul>
+            <p>What is an Async Function/Operation?</p>
+<p>Is a function that is not executed in the main thread, therefore, the async functions are non-blocking.</p>
+<p>In f# the async functions are part of the block or function called xxxxxxxx async {…}, seq{…}, etc and this is an example of its implementation.</p>
+<p>First we will have a function call worker who fetch the other functions works and perform the required task.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">let SimpleWorker() &#x3D;</span><br><span class="line">    printfn &quot;Work Start&quot;</span><br><span class="line">    printfn &quot;Working in %s&quot; (externalResource())</span><br><span class="line">    printfn &quot;Work End&quot;</span><br><span class="line">		</span><br></pre></td></tr></table></figure>
+
+<p>the signature of the SimpleWorker function is …..</p>
+<p>And the function <code>externalResource()</code> is defined by the following snippet:</p>
+<p>Signature: <code>unit -&gt; Async&lt;unit&gt;</code> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">let externalResource() &#x3D;</span><br><span class="line">        async &#123;do! Async.Sleep(5000)&#125;</span><br><span class="line">        sprintf &quot;Long External Task&quot;</span><br></pre></td></tr></table></figure>
+
+
+<p>The complete block</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">let externalResource() &#x3D; async &#123;</span><br><span class="line">        do! Async.Sleep(5000)</span><br><span class="line">        return sprintf &quot;Long External Task&quot;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Simple Worker, executing the main thread</span><br><span class="line">let SimpleWorker() &#x3D;</span><br><span class="line">    printfn &quot;Work Start&quot;</span><br><span class="line">    printfn &quot;Working in %s&quot; (externalResource() |&gt; Async.RunSynchronously)</span><br><span class="line">    Async.Sleep(3000)</span><br><span class="line">    printfn &quot;Work End&quot;</span><br><span class="line"></span><br><span class="line">SimpleWorker()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
 
         </div>
         <footer>
             <p class="meta">
                 <span class="byline author vcard">Posted by <span class="fn">VOH 83.</span></span>
-                <time datetime="2021-03-03T10:00:35.000Z" data-updated="true">Wed Mar 03 2021</time>
+                <time datetime="2021-05-08T23:01:12.245Z" data-updated="true">Sat May 08 2021</time>
                 
     <span class="categories">
     
-        <a class="category" href="/tags/Fsharp-F-Funcional/">Fsharp, F#, Funcional</a>
+        <a class="category" href="/tags/Fsharp-F-Funcional-async-await/">Fsharp, F#, Funcional, async, await.</a>
     
     </span>
 
@@ -142,7 +150,7 @@
             <div class="sharing">
     
         <a class="twitter-share-button"
-           target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=Links%20%C3%9Atiles">
+           target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?text=Async%20functions%20in%20Fsharp">
             Tweet
         </a>
     
@@ -150,11 +158,11 @@
 
             <p class="meta">
                 
-                <a class="basic-alignment left" href="/" title="Previous Post: Async functions in Fsharp">« Async functions in Fsharp</a>
+                <a class="basic-alignment left" href="/" title="Previous Post: Microsoft Visual Studio Project Type GUIDS">« Microsoft Visual Studio Project Type GUIDS</a>
                 
 
                 
-                <a class="basic-alignment right" href="/" title="Previous Post: Introducción">Introducción »</a>
+                <a class="basic-alignment right" href="/" title="Previous Post: Links Útiles">Links Útiles »</a>
                 
             </p>
         </footer>
